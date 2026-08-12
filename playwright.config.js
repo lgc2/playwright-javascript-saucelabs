@@ -39,19 +39,19 @@ export default defineConfig({
     {
       name: 'loggedin-chromium',
       testMatch: 'tests/loggedin-tests/**.spec.js',
-      use: { storageState: 'playwright/.auth/loggedout-chromium.json', ...devices['Desktop Chrome'] },
+      use: { storageState: 'playwright/.auth/loggedin-data-storage.json', ...devices['Desktop Chrome'] },
     },
 
     {
       name: 'loggedin-firefox',
       testMatch: 'tests/loggedin-tests/**.spec.js',
-      use: { storageState: 'playwright/.auth/loggedout-firefox.json', ...devices['Desktop Firefox'] },
+      use: { storageState: 'playwright/.auth/loggedin-data-storage.json', ...devices['Desktop Firefox'] },
     },
 
     {
       name: 'loggedin-webkit',
       testMatch: 'tests/loggedin-tests/**.spec.js',
-      use: { storageState: 'playwright/.auth/loggedout-webkit.json', ...devices['Desktop Safari'] },
+      use: { storageState: 'playwright/.auth/loggedin-data-storage.json', ...devices['Desktop Safari'] },
     },
     {
       name: 'loggedout-chromium',

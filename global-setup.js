@@ -32,28 +32,18 @@ export default async function globalSetup() {
   const authDir = path.join(process.cwd(), 'playwright', '.auth');
   if (!fs.existsSync(authDir)) fs.mkdirSync(authDir, { recursive: true });
 
-  const browsers = [
-    { name: 'loggedout-chromium', type: chromium, out: path.join(authDir, 'loggedout-chromium.json') },
-    { name: 'loggedout-firefox', type: firefox, out: path.join(authDir, 'loggedout-firefox.json') },
-    { name: 'loggedout-webkit', type: webkit, out: path.join(authDir, 'loggedout-webkit.json') },
-  ];
+  const browser = {
+    name: 'loggedin-data-storage', type: chromium, out: path.join(authDir, 'loggedin-data-storage.json')
+  };
 
-  const failures = [];
-  for (const b of browsers) {
-    try {
-      // eslint-disable-next-line no-console
-      console.log(`global-setup: creating storage for ${b.name}`);
-      await makeAuth(b.type, b.out, baseURL);
-      // eslint-disable-next-line no-console
-      console.log(`global-setup: wrote ${b.out}`);
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(`global-setup: failed for ${b.name}:`, e && e.message ? e.message : e);
-      failures.push({ name: b.name, error: e });
-    }
-  }
-
-  if (failures.length === browsers.length) {
-    throw new Error(`globalSetup failed for all browsers: ${failures.map(f => f.name).join(', ')}`);
+  try {
+    // eslint-disable-next-line no-console
+    console.log(`global-setup: creating storage for ${browser.name}`);
+    await makeAuth(browser.type, browser.out, baseURL);
+    // eslint-disable-next-line no-console
+    console.log(`global-setup: wrote ${browser.out}`);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    throw new Error(`global-setup: failed for ${browser.name}:`, e && e.message ? e.message : e);
   }
 }

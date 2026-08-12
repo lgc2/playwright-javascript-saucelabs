@@ -1,4 +1,4 @@
-class InventoryPage {
+export class InventoryPage {
     constructor(page) {
         this.page = page;
         this.pageTitle = page.locator('[data-test="title"]');
@@ -6,5 +6,3 @@ class InventoryPage {
         this.inventoryItemNames = page.locator('[data-test="inventory-item"] [data-test="inventory-item-name"]');
     }
 }
-
-module.exports = { InventoryPage };

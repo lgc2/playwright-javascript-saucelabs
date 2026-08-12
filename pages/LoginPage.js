@@ -1,4 +1,4 @@
-class LoginPage {
+export class LoginPage {
     constructor(page) {
         this.page = page;
         this.loginLogo = page.locator('.login_logo');
@@ -8,7 +8,7 @@ class LoginPage {
     }
 
     async navigate() {
-        await this.page.goto('./');
+        await this.page.goto('/');
     }
 
     async login(username, password) {
@@ -17,5 +17,3 @@ class LoginPage {
         await this.btnLogin.click();
     }
 }
-
-module.exports = { LoginPage };

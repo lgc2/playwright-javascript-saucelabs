@@ -1,9 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { InventoryPage } from '../pages/InventoryPage.js';
+import { InventoryPage } from '../../pages/InventoryPage.js';
 
 test('Should show products after login', async ({ page }) => {
     const inventoryPage = new InventoryPage(page);
-    await page.goto('./inventory.html');
+    await page.goto('/inventory.html');
+    await page.waitForLoadState('networkidle');
 
     const items = inventoryPage.inventoryItems;
     const itemNames = inventoryPage.inventoryItemNames;

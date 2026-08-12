@@ -13,6 +13,7 @@ import { defineConfig, devices } from '@playwright/test';
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
+  globalSetup: './global-setup.js',
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -36,25 +37,38 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'setup',
-      testMatch: 'tests/login.setup.spec.js',
-    },
-    {
-      name: 'chromium',
-      dependencies: ['setup'],
-      use: { storageState: 'playwright/.auth/user.json', ...devices['Desktop Chrome'] },
+      name: 'loggedin-chromium',
+      testMatch: 'tests/loggedin-tests/**.spec.js',
+      use: { storageState: 'playwright/.auth/loggedout-chromium.json', ...devices['Desktop Chrome'] },
     },
 
     {
-      name: 'firefox',
-      dependencies: ['setup'],
-      use: { storageState: 'playwright/.auth/user.json', ...devices['Desktop Firefox'] },
+      name: 'loggedin-firefox',
+      testMatch: 'tests/loggedin-tests/**.spec.js',
+      use: { storageState: 'playwright/.auth/loggedout-firefox.json', ...devices['Desktop Firefox'] },
     },
 
     {
-      name: 'webkit',
-      dependencies: ['setup'],
-      use: { storageState: 'playwright/.auth/user.json', ...devices['Desktop Safari'] },
+      name: 'loggedin-webkit',
+      testMatch: 'tests/loggedin-tests/**.spec.js',
+      use: { storageState: 'playwright/.auth/loggedout-webkit.json', ...devices['Desktop Safari'] },
+    },
+    {
+      name: 'loggedout-chromium',
+      testMatch: 'tests/loggedout-tests/**.spec.js',
+      use: { ...devices['Desktop Chrome'] },
+    },
+
+    {
+      name: 'loggedout-firefox',
+      testMatch: 'tests/loggedout-tests/**.spec.js',
+      use: { ...devices['Desktop Firefox'] },
+    },
+
+    {
+      name: 'loggedout-webkit',
+      testMatch: 'tests/loggedout-tests/**.spec.js',
+      use: { ...devices['Desktop Safari'] },
     },
 
     /* Test against mobile viewports. */
